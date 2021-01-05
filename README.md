@@ -1,2 +1,3 @@
-# my-blog
-Using NEXT JS and Sanity to develop my personal blog
+## My Blog
+
+using NEXT JS and Sanity to develop my personal blog
