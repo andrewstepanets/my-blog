@@ -4,6 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        bgGray: "#f4f7f9",
+        darkGray: "#2b2c38",
         primaryGray: "#f1f1f1",
         twitter: "#55acee",
         facebook: "#3b5998",
@@ -59,6 +61,9 @@ module.exports = {
           800: "#5E1D09",
           900: "#3F1306",
         },
+        yellow: {
+          100: "#dba919"
+        }
       },
     },
   },
