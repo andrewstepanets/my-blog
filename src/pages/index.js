@@ -1,6 +1,11 @@
 import Head from 'next/head'
-import Navbar from '../components/Navbar'
-import Header from '../components/Header'
+import { Row, Col, Media, Card } from 'react-bootstrap'
+import AuthorIntro from 'components/AuthorIntro'
+import CardListItem from 'components/CardListItem'
+import CardItem from 'components/CardItem'
+
+import Layout from 'components/Layout'
+
 
 export default function Home() {
   return (
@@ -9,11 +14,19 @@ export default function Home() {
         <title>My Personal Blog</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="container mx-auto">
+      <Layout>
+        <AuthorIntro />
+        <hr />
+        <Row className="mb-5">
+          <Col md="10">
+            <CardListItem />
+          </Col>
+          <Col md="4">
+            <CardItem />
+          </Col>
+        </Row>
 
-        <Navbar />
-        <Header />
-      </div>
+      </Layout>
     </div>
   )
 }
