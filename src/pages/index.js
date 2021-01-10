@@ -28,7 +28,11 @@ export default function Home({ blogs }) {
           {
             blogs.map(blog =>
               <Col key={blog.slug} md="4">
-                <CardItem title={blog.title} subtitle={blog.subtitle} />
+                <CardItem
+                  title={blog.title}
+                  subtitle={blog.subtitle}
+                  date={blog.date}
+                  image={blog.coverImage} />
               </Col>
             )
           }
@@ -43,6 +47,8 @@ export default function Home({ blogs }) {
 // Provides props to your pageProps
 // It will create static page
 
+
+// This is the example of generation of static page
 export async function getStaticProps() {
 
   const blogs = await getAllBlogs();
@@ -53,3 +59,16 @@ export async function getStaticProps() {
     }
   }
 }
+
+
+// This is example of generation dynamic page
+// export async function getServerSideProps() {
+
+//   const blogs = await getAllBlogs();
+
+//   return {
+//     props: {
+//       blogs
+//     }
+//   }
+// }
