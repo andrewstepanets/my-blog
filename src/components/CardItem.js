@@ -1,6 +1,6 @@
 import { Card } from 'react-bootstrap'
 
-function CardItem() {
+function CardItem({ title, subtitle }) {
     return (
         <Card className={`as-card`}>
             <div className="card-body-wrapper">
@@ -24,8 +24,8 @@ function CardItem() {
                     />
                 </div>
                 <Card.Body>
-                    <Card.Title className="card-main-title">Placeholder Title</Card.Title>
-                    <Card.Text>Placehodler Subtitle</Card.Text>
+                    <Card.Title className="card-main-title">{title}</Card.Title>
+                    <Card.Text>{subtitle}</Card.Text>
                 </Card.Body>
             </div>
             <a className="card-button">
