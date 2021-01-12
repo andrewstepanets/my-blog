@@ -1,7 +1,6 @@
-import Head from 'next/head'
-import { Row, Col, Media, Card } from 'react-bootstrap'
+
+import { Row, Col } from 'react-bootstrap'
 import AuthorIntro from 'components/AuthorIntro'
-import CardListItem from 'components/CardListItem'
 import CardItem from 'components/CardItem'
 
 import Layout from 'components/Layout'
@@ -16,10 +15,7 @@ export default function Home({ blogs }) {
 
   return (
     <div>
-      <Head>
-        <title>My Personal Blog</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+
       <Layout>
         <AuthorIntro />
         <hr />
