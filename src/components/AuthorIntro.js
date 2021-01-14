@@ -19,7 +19,7 @@ function AuthorIntro() {
                         <h5 className="font-weight-bold mb-0">Hello Friends,</h5>
                         <p className="welcome-text">
                             My name is Andrew Stepanets and I am an experienced front end developer.
-                            and this is my blog page.
+                            and this is my personal blog page.
                 </p>
                     </Media.Body>
                 </Media>
