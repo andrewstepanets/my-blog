@@ -13,12 +13,12 @@ const serializers = {
                 </HighlightCode>
             )
         },
-        image: ({ node }) => {
+        image: ({ node: { asset, alt, position = 'center' } }) => {
             return (
-                <div className="blog-image">
-                    <img src={urlFor(node.asset).height(300).fit('max').url()} />
+                <div className={`blog-image blog-image-${position}`}>
+                    <img src={urlFor(asset).height(300).fit('max').url()} />
                     <div className="image-alt">
-                        {node.alt}
+                        {alt}
                     </div>
                 </div>
             )
