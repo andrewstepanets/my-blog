@@ -4,6 +4,7 @@ import { Row, Col } from 'react-bootstrap'
 import { getBlogBySlug, getAllBlogs } from '../../../lib/api'
 import ArticleHeader from 'components/ArticleHeader'
 import BlogContent from 'components/BlogContent'
+import { urlFor } from '../../../lib/api'
 
 
 
@@ -32,7 +33,7 @@ function BlogDetail({ blog }) {
                     <ArticleHeader
                         title={blog.title}
                         subtitle={blog.subtitle}
-                        image={blog.coverImage}
+                        image={urlFor(blog.coverImage).height(600).url()}
                         author={blog.author}
                     />
                     <hr />
