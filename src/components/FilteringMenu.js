@@ -1,4 +1,6 @@
 
+import { FaList as IconList, FaBorderAll as IconBorder } from "react-icons/fa";
+
 
 export default function FilteringMenu({ onChange, filter }) {
     return (
@@ -6,7 +8,12 @@ export default function FilteringMenu({ onChange, filter }) {
             <div onClick={() => {
                 onChange();
             }}>
-                {!filter ? <span>Thumb </span> : <span>List</span>}
+                {!filter ? <IconList
+                    className="clickable hoverable"
+                    size="20px" />
+                    : <IconBorder
+                        className="clickable hoverable"
+                        size="20px" />}
             </div>
         </div>
     )
