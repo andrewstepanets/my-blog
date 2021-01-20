@@ -9,12 +9,19 @@ import { getAllBlogs } from '../../lib/api'
 import { useState } from 'react'
 import CardListItem from 'components/CardListItem'
 
+import { useGetBlogs } from '../../actions'
+
+
 
 
 
 export default function Home({ blogs }) {
 
   const [filter, setFilter] = useState(false)
+
+  const { data, error } = useGetBlogs();
+
+  console.log(JSON.stringify(data));
 
   return (
     <div>
