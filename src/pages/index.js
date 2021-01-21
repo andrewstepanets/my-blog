@@ -15,13 +15,12 @@ import { useGetBlogs } from '../../actions'
 
 
 
-export default function Home({ blogs }) {
+export default function Home({ blogs: initialData }) {
 
   const [filter, setFilter] = useState(false)
 
-  const { data, error } = useGetBlogs();
+  const { data: blogs, error } = useGetBlogs(initialData);
 
-  console.log(JSON.stringify(data));
 
   return (
     <div>
@@ -34,9 +33,6 @@ export default function Home({ blogs }) {
           }} />
         <hr />
         <Row className="mb-5">
-          {/* <Col md="10">
-            <CardListItem />
-          </Col> */}
           {
             blogs.map(blog =>
 
@@ -82,7 +78,7 @@ export default function Home({ blogs }) {
 // This is the example of generation of static page
 export async function getStaticProps() {
 
-  const blogs = await getAllBlogs();
+  const blogs = await getAllBlogs({ offset: 3 });
 
   return {
     props: {
