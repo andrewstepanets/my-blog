@@ -78,7 +78,7 @@ export default function Home({ blogs: initialData }) {
 // This is the example of generation of static page
 export async function getStaticProps() {
 
-  const blogs = await getAllBlogs({ offset: 3 });
+  const blogs = await getAllBlogs({ offset: 0 });
 
   return {
     props: {
