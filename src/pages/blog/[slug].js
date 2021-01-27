@@ -1,18 +1,20 @@
 
+
+
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import Layout from 'components/Layout'
-import ArticleHeader from 'components/ArticleHeader'
-import { getBlogBySlug, getAllBlogs, onBlogUpdate } from '../../../lib/api'
+import Layout from 'components/Layout';
+import ArticleHeader from 'components/ArticleHeader';
+import ErrorPage from 'next/error';
+import { getBlogBySlug, getPaginatedBlogs, onBlogUpdate } from '../../../lib/api';
 import { Row, Col } from 'react-bootstrap'
-import BlogContent from 'components/BlogContent'
-import { urlFor } from '../../../lib/api'
+import { urlFor } from '../../../llib/api';
+import moment from 'moment';
+import { useRouter } from 'next/router';
 
+import BlogContent from 'components/BlogContent';
+import PreviewAlert from 'components/PreviewAlert';
 
-
-
-function BlogDetail({ blog: initialBlog, preview }) {
-
+const BlogDetail = ({ blog: initialBlog, preview }) => {
     const router = useRouter();
     const [blog, setBlog] = useState(initialBlog);
 
@@ -39,7 +41,6 @@ function BlogDetail({ blog: initialBlog, preview }) {
             </Layout>
         )
     }
-
     return (
         <Layout className="blog-detail-page">
             <Row>
@@ -60,9 +61,11 @@ function BlogDetail({ blog: initialBlog, preview }) {
             </Row>
         </Layout>
     )
+
 }
 
 export async function getStaticProps({ params, preview = false, previewData }) {
+
     const blog = await getBlogBySlug(params.slug, preview);
     return {
         props: { blog, preview },
@@ -72,7 +75,8 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 
 // TODO: Introduce fallback
 export async function getStaticPaths() {
-    const blogs = await getAllBlogs();
+
+    const blogs = await getPaginatedBlogs();
     const paths = blogs?.map(b => ({ params: { slug: b.slug } }));
     return {
         paths,
@@ -80,4 +84,4 @@ export async function getStaticPaths() {
     }
 }
 
-export default BlogDetail
+export default BlogDetail;
