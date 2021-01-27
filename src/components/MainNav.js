@@ -2,10 +2,10 @@ import { Navbar, Nav } from 'react-bootstrap'
 import Link from 'next/link'
 
 
-function MainNav() {
-
+function MainNav({ theme, toggleTheme }) {
     return (
         <Navbar
+            variant={theme.type}
             className="as-navbar as-nav-base"
             bg="transparent"
             expand="lg" >
@@ -24,6 +24,9 @@ function MainNav() {
                             </Link>
                         }
                     />
+                    <button className="btn btn-success" onClick={toggleTheme}>
+                        {theme.type}
+                    </button>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

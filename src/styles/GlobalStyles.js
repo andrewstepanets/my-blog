@@ -297,9 +297,6 @@ body {
       transition: color 0s ease-out 0s, background 0.2s ease-out 0s;
     }
 
-    .card-button {
-      background-color: #9b5f5f;
-    }
   }
 
   .as-navbar.as-nav-base {
@@ -308,6 +305,9 @@ body {
 
     .as-navbar {
       &-brand {
+        color: #ffffff;
+      }
+      &-brand a {
         color: #ffffff;
       }
 
@@ -354,6 +354,34 @@ body {
     color: #63696e;
   }
 }
+
+.dark {
+  .card.as-card {
+    background-color: #232129;
+    transition: color 0s ease-out 0s, background 0.2s ease-out 0s;
+    .card-body-wrapper {
+      background-color: #232129;
+      transition: color 0s ease-out 0s, background 0.2s ease-out 0s;
+    }
+
+  }
+
+  .as-navbar.as-nav-base {
+    width: 100%;
+    padding: 20px 0px;
+
+    .as-navbar {
+      &-brand {
+        color: #ffffff;
+      }
+
+      &-link {
+        color: #ffffff;
+      }
+    }
+  }
+}
+
 `;
 
 export default GlobalStyles;

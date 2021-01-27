@@ -3,10 +3,14 @@ import { Container } from 'react-bootstrap'
 import GlobalStyles from 'styles/GlobalStyles'
 import MainNav from 'components/MainNav'
 import Footer from 'components/Footer'
+import { useTheme } from 'providers/ThemeProvider'
 
 function Layout({ children, className }) {
+
+    const { theme, toggleTheme } = useTheme();
+
     return (
-        <>
+        <div className={theme.type}>
             <Head>
                 <title>My Personal Blog</title>
                 <link rel="icon" href="/favicon.ico" />
@@ -15,7 +19,7 @@ function Layout({ children, className }) {
             </Head>
             <Container>
                 <GlobalStyles />
-                <MainNav />
+                <MainNav theme={theme} toggleTheme={toggleTheme} />
                 <div className={`page-wrapper ${className}`}>
 
                     {children}
@@ -23,7 +27,16 @@ function Layout({ children, className }) {
                 </div>
                 <Footer />
             </Container>
-        </>
+            <style jsx global>
+                {`
+                    html, body {
+                        background: ${theme.background};
+                        color: ${theme.fontColor};
+                        transition: all 0.2s ease-out 0s;
+                    }
+                `}
+            </style>
+        </div>
 
     )
 }
