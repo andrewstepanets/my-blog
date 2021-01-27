@@ -1,20 +1,24 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { FaList as IconList, FaBorderAll as IconBorder } from "react-icons/fa";
+const LIST_VIEW_ICONS = ['list', 'border-all'];
+const DATE_FILTERING_ICONS = ['sort-numeric-down', 'sort-numeric-up'];
 
 
 export default function FilteringMenu({ onChange, filter }) {
     return (
         <div className="filtering-menu mb-2">
-            <div onClick={() => {
-                onChange();
-            }}>
-                {!filter ? <IconList
-                    className="clickable hoverable"
-                    size="20px" />
-                    : <IconBorder
-                        className="clickable hoverable"
-                        size="20px" />}
-            </div>
+            <FontAwesomeIcon
+                className="clickable hoverable mr-3"
+                size="2x"
+                icon={LIST_VIEW_ICONS[filter.view.list]}
+                onClick={() =>
+                    onChange('view', { list: +!filter.view.list })} />
+            <FontAwesomeIcon
+                className="clickable hoverable"
+                size="2x"
+                icon={DATE_FILTERING_ICONS[filter.date.asc]}
+                onClick={() =>
+                    onChange('date', { asc: +!filter.date.asc })} />
         </div>
     )
 }

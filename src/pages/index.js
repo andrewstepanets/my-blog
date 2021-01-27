@@ -1,72 +1,92 @@
+import { useState } from 'react';
 
-import { Row, Col } from 'react-bootstrap'
-import AuthorIntro from 'components/AuthorIntro'
-import CardItem from 'components/CardItem'
-import Layout from 'components/Layout'
-import FilteringMenu from 'components/FilteringMenu'
+import { Row, Button } from 'react-bootstrap';
+import Layout from 'components/Layout';
+import AuthorIntro from 'components/AuthorIntro';
+import FilteringMenu from 'components/FilteringMenu';
+// import PreviewAlert from 'components/PreviewAlert';
 
-import { getAllBlogs } from '../../lib/api'
-import { useState } from 'react'
-import CardListItem from 'components/CardListItem'
+import { useGetBlogsPages } from '../../actions/pagination';
+import { getPaginatedBlogs } from '../../lib/api';
 
-import { useGetBlogs } from '../../actions'
+import { Col } from 'react-bootstrap';
+import CardItem from 'components/CardItem';
+// import CardItemBlank from 'components/CardItemBlank';
+import CardListItem from 'components/CardListItem';
+// import CardListItemBlank from 'components/CardListItemBlank';
+import moment from 'moment';
+
+
+export const BlogList = ({ data = [], filter }) => {
+  return data.map(page => page.map(blog =>
+    filter.view.list ?
+      <Col key={`${blog.slug}-list`} md="9">
+        <CardListItem
+          author={blog.author}
+          title={blog.title}
+          subtitle={blog.subtitle}
+          date={moment(blog.date).format('LL')}
+          link={{
+            href: '/blogs/[slug]',
+            as: `/blogs/${blog.slug}`
+          }}
+        />
+      </Col>
+      :
+      <Col key={blog.slug} lg="4" md="6">
+        <CardItem
+          author={blog.author}
+          title={blog.title}
+          subtitle={blog.subtitle}
+          date={moment(blog.date).format('LL')}
+          image={blog.coverImage}
+          link={{
+            href: '/blogs/[slug]',
+            as: `/blogs/${blog.slug}`
+          }}
+        />
+      </Col>
+  ))
+}
 
 
 
+export default function Home({ blogs, preview }) {
 
+  const [filter, setFilter] = useState({
+    view: { list: 0 },
+    date: { asc: 0 }
+  });
 
-export default function Home({ blogs: initialData }) {
-
-  const [filter, setFilter] = useState(false)
-
-  const { data: blogs, error } = useGetBlogs(initialData);
-
+  const {
+    data, size, setSize, hitEnd
+  } = useGetBlogsPages({ filter });
 
   return (
-    <div>
-      <Layout>
-        <AuthorIntro />
-        <FilteringMenu
-          filter={filter}
-          onChange={() => {
-            setFilter(!filter)
-          }} />
-        <hr />
-        <Row className="mb-5">
-          {
-            blogs.map(blog =>
+    <Layout>
+      <AuthorIntro />
+      <FilteringMenu
+        filter={filter}
+        onChange={(option, value) =>
+          setFilter({ ...filter, [option]: value })
+        }
+      />
+      <hr />
+      <Row className="mb-5">
+        <BlogList data={data || [blogs]} filter={filter} />
+      </Row>
+      <div style={{ textAlign: 'center' }}>
+        <Button
+          onClick={() => setSize(size + 1)}
+          disabled={hitEnd}
+          size="lg"
+          variant="outline-secondary">
+          {/* {isLoadingMore ? '...' : isReachingEnd ? 'No more blogs' : 'More Blogs'} */}
+          Load More
+        </Button>
+      </div>
 
-              filter ?
-                <Col key={`${blog.slug}-list`} md="9">
-                  <CardListItem
-                    author={blog.author}
-                    title={blog.title}
-                    subtitle={blog.subtitle}
-                    date={blog.date}
-                    link={{
-                      href: 'blog/[slug]',
-                      as: `/blog/${blog.slug}`
-                    }} />
-                </Col>
-                :
-                <Col key={blog.slug} md="4">
-                  <CardItem
-                    author={blog.author}
-                    title={blog.title}
-                    subtitle={blog.subtitle}
-                    date={blog.date}
-                    image={blog.coverImage}
-                    link={{
-                      href: 'blog/[slug]',
-                      as: `/blog/${blog.slug}`
-                    }} />
-                </Col>
-            )
-          }
-        </Row>
-
-      </Layout>
-    </div>
+    </Layout>
   )
 }
 
@@ -76,14 +96,13 @@ export default function Home({ blogs: initialData }) {
 
 
 // This is the example of generation of static page
-export async function getStaticProps() {
-
-  const blogs = await getAllBlogs({ offset: 0 });
-
+export async function getStaticProps({ preview = false }) {
+  const blogs = await getPaginatedBlogs({ offset: 0, date: 'desc' });
   return {
     props: {
-      blogs
-    }
+      blogs, preview
+    },
+    revalidate: 1
   }
 }
 
