@@ -1,9 +1,9 @@
 import { Card } from 'react-bootstrap'
 import Link from 'next/link'
 
-function CardListItem({ author, title, subtitle, date, link }) {
+function CardListItem({ author, title, subtitle, date, link, mode = 'normal' }) {
     return (
-        <Card className={`as-card as-card-list`}>
+        <Card className={`as-card as-card-list ${mode}`}>
             <div className="card-body-wrapper">
                 <Card.Header
                     className="d-flex flex-row">
@@ -13,14 +13,30 @@ function CardListItem({ author, title, subtitle, date, link }) {
                         height="50px"
                         width="50px"
                         alt="avatar" />
-                    <div>
-                        <Card.Title className="font-weight-bold mb-1">{author?.name}</Card.Title>
-                        <Card.Text className="card-date">{date}</Card.Text>
-                    </div>
+                    {mode === 'placeholder' ?
+                        <div>
+                            <Card.Title className="font-weight-bold mb-1">Placeholder Author</Card.Title>
+                            <Card.Text className="card-date">Placeholder Date</Card.Text>
+                        </div>
+                        :
+                        <div>
+                            <Card.Title className="font-weight-bold mb-1">{author?.name}</Card.Title>
+                            <Card.Text className="card-date">{date}</Card.Text>
+                        </div>
+                    }
                 </Card.Header>
                 <Card.Body>
-                    <Card.Title className="card-main-title">{title}</Card.Title>
-                    <Card.Text>{subtitle}</Card.Text>
+                    {mode === 'placeholder' ?
+                        <>
+                            <Card.Title className="card-main-title">Placeholder Title</Card.Title>
+                            <Card.Text>Placeholder Subtitle</Card.Text>
+                        </>
+                        :
+                        <>
+                            <Card.Title className="card-main-title">{title}</Card.Title>
+                            <Card.Text>{subtitle}</Card.Text>
+                        </>
+                    }
                 </Card.Body>
             </div>
             {
