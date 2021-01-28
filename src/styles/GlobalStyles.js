@@ -325,14 +325,17 @@ body {
     }
   }
 
+  .react-toggle-thumb {
+    border-color: black;
+  }
+
   .react-toggle-track {
     background-color: black;
     &:hover {
       background-color: black;
     }
 
-    &-x,
-    &-check {
+    &-x, &-check {
       right: 8px;
       width: 15px;
       height: 15px;

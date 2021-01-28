@@ -22,6 +22,7 @@ library.add(
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'highlight.js/styles/stackoverflow-dark.css';
+import "react-toggle/style.css";
 // import 'highlight.js/styles/darcula.css';
 
 function MyApp({ Component, pageProps }) {
