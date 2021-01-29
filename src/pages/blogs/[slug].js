@@ -5,14 +5,14 @@ import { useEffect, useState } from 'react';
 import Layout from 'components/Layout';
 import ArticleHeader from 'components/ArticleHeader';
 import ErrorPage from 'next/error';
-import { getBlogBySlug, getPaginatedBlogs, onBlogUpdate } from '../../../lib/api';
+import { getBlogBySlug, getPaginatedBlogs, onBlogUpdate } from 'lib/api';
 import { Row, Col } from 'react-bootstrap'
-import { urlFor } from '../../../llib/api';
+import { urlFor } from 'lib/api';
 import moment from 'moment';
 import { useRouter } from 'next/router';
 
 import BlogContent from 'components/BlogContent';
-import PreviewAlert from 'components/PreviewAlert';
+// import PreviewAlert from 'components/PreviewAlert';
 
 const BlogDetail = ({ blog: initialBlog, preview }) => {
     const router = useRouter();
@@ -65,11 +65,10 @@ const BlogDetail = ({ blog: initialBlog, preview }) => {
 }
 
 export async function getStaticProps({ params, preview = false, previewData }) {
-
     const blog = await getBlogBySlug(params.slug, preview);
     return {
         props: { blog, preview },
-        unstable_revalidate: 1
+        revalidate: 1
     }
 }
 

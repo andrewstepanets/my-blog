@@ -4,10 +4,10 @@ import { Row, Button } from 'react-bootstrap';
 import Layout from 'components/Layout';
 import AuthorIntro from 'components/AuthorIntro';
 import FilteringMenu from 'components/FilteringMenu';
-// import PreviewAlert from 'components/PreviewAlert';
+import PreviewAlert from 'components/PreviewAlert';
 
-import { useGetBlogsPages } from '../../actions/pagination';
-import { getPaginatedBlogs } from '../../lib/api';
+import { useGetBlogsPages } from '../actions/pagination';
+import { getPaginatedBlogs } from '../lib/api';
 
 import { Col } from 'react-bootstrap';
 import CardItem from 'components/CardItem';

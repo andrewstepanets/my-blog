@@ -1,7 +1,7 @@
 
 import BlockContent from '@sanity/block-content-to-react'
 import HighlightCode from 'components/HighlightCode'
-import { urlFor } from '../../lib/api'
+import { urlFor } from 'lib/api'
 
 const serializers = {
     types: {

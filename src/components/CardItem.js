@@ -1,6 +1,6 @@
 import { Card } from 'react-bootstrap'
 import Link from 'next/link'
-import { urlFor } from '../../lib/api'
+import { urlFor } from 'lib/api'
 
 function CardItem({ title, subtitle, date, image, author, link, mode = 'normal' }) {
     return (

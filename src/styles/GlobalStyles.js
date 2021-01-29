@@ -318,6 +318,18 @@ body {
   }
 }
 
+// .day-hight-toggle.react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
+//   background-color: #000000;
+// }
+
+// .day-hight-toggle.react-toggle--checked .react-toggle-track {
+//   background-color: #19AB27;
+// }
+
+// .day-hight-toggle.react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
+//   background-color: #128D15;
+// }
+
 .day-night-toggle.react-toggle {
   &.react-toggle--checked:hover {
     &:not(.react-toggle--disabled) .react-toggle-track {
