@@ -1,5 +1,5 @@
 import { useSWRInfinite } from 'swr';
-import { getBlogs } from './index';
+import { getBlogs } from 'actions';
 
 export const useGetBlogsPages = ({ filter }) => {
     const result = useSWRInfinite(

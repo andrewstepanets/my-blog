@@ -6,8 +6,8 @@ import AuthorIntro from 'components/AuthorIntro';
 import FilteringMenu from 'components/FilteringMenu';
 import PreviewAlert from 'components/PreviewAlert';
 
-import { useGetBlogsPages } from '../actions/pagination';
-import { getPaginatedBlogs } from '../lib/api';
+import { useGetBlogsPages } from 'actions/pagination';
+import { getPaginatedBlogs } from 'lib/api';
 
 import { Col } from 'react-bootstrap';
 import CardItem from 'components/CardItem';
@@ -15,7 +15,6 @@ import CardItemBlank from 'components/CardItemBlank';
 import CardListItem from 'components/CardListItem';
 import CardListItemBlank from 'components/CardListItemBlank';
 import moment from 'moment';
-
 
 export const BlogList = ({ data = [], filter }) => {
   return data.map(page => page.map(blog =>
@@ -49,10 +48,7 @@ export const BlogList = ({ data = [], filter }) => {
   ))
 }
 
-
-
 export default function Home({ blogs, preview }) {
-
   const [filter, setFilter] = useState({
     view: { list: 0 },
     date: { asc: 0 }
@@ -64,6 +60,7 @@ export default function Home({ blogs, preview }) {
 
   return (
     <Layout>
+      { preview && <PreviewAlert />}
       <AuthorIntro />
       <FilteringMenu
         filter={filter}
@@ -82,20 +79,13 @@ export default function Home({ blogs, preview }) {
           size="lg"
           variant="outline-secondary">
           {/* {isLoadingMore ? '...' : isReachingEnd ? 'No more blogs' : 'More Blogs'} */}
-          Load More
+          {!hitEnd ? 'Load More' : 'No more blogs'}
         </Button>
       </div>
-
     </Layout>
   )
 }
 
-//This function is called during the buid (build time)
-// Provides props to your pageProps
-// It will create static page
-
-
-// This is the example of generation of static page
 export async function getStaticProps({ preview = false }) {
   const blogs = await getPaginatedBlogs({ offset: 0, date: 'desc' });
   return {
@@ -105,16 +95,3 @@ export async function getStaticProps({ preview = false }) {
     revalidate: 1
   }
 }
-
-
-// This is example of generation dynamic page
-// export async function getServerSideProps() {
-
-//   const blogs = await getAllBlogs();
-
-//   return {
-//     props: {
-//       blogs
-//     }
-//   }
-// }

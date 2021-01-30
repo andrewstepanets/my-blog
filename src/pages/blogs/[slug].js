@@ -1,18 +1,15 @@
-
-
-
 import { useEffect, useState } from 'react';
 import Layout from 'components/Layout';
 import ArticleHeader from 'components/ArticleHeader';
 import ErrorPage from 'next/error';
-import { getBlogBySlug, getPaginatedBlogs, onBlogUpdate } from 'lib/api';
+import { getBlogBySlug, getAllBlogs, onBlogUpdate } from 'lib/api';
 import { Row, Col } from 'react-bootstrap'
 import { urlFor } from 'lib/api';
 import moment from 'moment';
 import { useRouter } from 'next/router';
 
 import BlogContent from 'components/BlogContent';
-// import PreviewAlert from 'components/PreviewAlert';
+import PreviewAlert from 'components/PreviewAlert';
 
 const BlogDetail = ({ blog: initialBlog, preview }) => {
     const router = useRouter();
@@ -41,6 +38,7 @@ const BlogDetail = ({ blog: initialBlog, preview }) => {
             </Layout>
         )
     }
+
     return (
         <Layout className="blog-detail-page">
             <Row>
@@ -61,7 +59,6 @@ const BlogDetail = ({ blog: initialBlog, preview }) => {
             </Row>
         </Layout>
     )
-
 }
 
 export async function getStaticProps({ params, preview = false, previewData }) {
@@ -74,8 +71,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 
 // TODO: Introduce fallback
 export async function getStaticPaths() {
-
-    const blogs = await getPaginatedBlogs();
+    const blogs = await getAllBlogs();
     const paths = blogs?.map(b => ({ params: { slug: b.slug } }));
     return {
         paths,
