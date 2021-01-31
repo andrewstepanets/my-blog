@@ -20,7 +20,7 @@ body {
   font-style: normal;
   font-size: 14px;
   font-weight: 300;
-  background-color: #f4f7f9;
+  // background-color: #f4f7f9;
   box-sizing: border-box;
 }
 *,
