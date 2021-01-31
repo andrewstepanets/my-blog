@@ -257,9 +257,7 @@ body {
   margin-bottom: 10px;
   text-align: center;
 
-  > img {
-    max-width: 100%;
-  }
+  
 
   &-left {
     float: left;
@@ -270,6 +268,9 @@ body {
     float: right;
     margin-left: 30px;
     max-width: 50%;
+  }
+  > img {
+    max-width: 100%;
   }
 }
 .image-alt {
