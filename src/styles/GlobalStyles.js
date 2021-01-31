@@ -72,6 +72,7 @@ body {
 
   .card-main-title {
     font-size: 22px;
+    height: 60px;
   }
 
   .card-header {
@@ -256,13 +257,19 @@ body {
   margin-bottom: 10px;
   text-align: center;
 
+  > img {
+    max-width: 100%;
+  }
+
   &-left {
     float: left;
     margin-right: 30px;
+    max-width: 50%;
   }
   &-right {
     float: right;
     margin-left: 30px;
+    max-width: 50%;
   }
 }
 .image-alt {
